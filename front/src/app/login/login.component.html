@@ -1,0 +1,43 @@
+<section class="section">
+    <div class="container">
+        <h1 class="title">LOGIN</h1>
+        <h4 *ngIf="apiResponse && apiResponse.result.status=='failed'" class="notification is-danger is-medium">
+            {{apiResponse.result.message}}</h4>
+
+        <div class="columns">
+            <div class="column is-half">
+                <form [formGroup]="LoginForm" (ngSubmit)="login()" novalidate>
+                    <div class="field">
+                        <p class="control has-icons-left has-icons-right">
+                            <input class="input" type="text" placeholder="Username" formControlName="username" required>
+
+                            <span class="icon is-small is-left">
+              <i class="fa fa-envelope"></i>
+            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control has-icons-left has-icons-right">
+                            <input class="input" type="password" placeholder="Password" formControlName="password"
+                                   required>
+
+                            <span class="icon is-small is-left">
+              <i class="fa fa-lock"></i>
+            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control">
+                            <button type="submit" class="button is-success">
+              <span class="icon is-small">
+                <i class="fa fa-unlock-alt"></i>
+              </span>
+                                <span>Login</span>
+                            </button>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

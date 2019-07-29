@@ -1,0 +1,144 @@
+<section class="section">
+    <div class="container">
+        <h1 class="title">REGISTER</h1>
+        <div *ngIf="formSubmitted">
+            <h3 class="tag is-info is-medium">
+      <span class="icon">
+        <i class="fa fa-info"></i>
+      </span>
+                <span>Form submitted successfully.</span>
+            </h3>
+            <br><br>
+        </div>
+
+
+        <h4 *ngIf="apiResponse && apiResponse.result.status=='failed'" class="notification is-danger is-medium">
+            {{apiResponse.result.message}}</h4>
+        <h4 *ngIf="apiResponse && apiResponse.result.status=='success'" class="notification is-success is-medium">
+            {{apiResponse.result.message}}</h4>
+
+        <form [formGroup]="UserForm" (ngSubmit)="addUser()">
+            <div class="field">
+                <label class="label">Username: </label>
+                <div class="control">
+                    <input type="text" class="input" formControlName="username"/>
+                </div>
+                <p *ngIf="UserForm.get('username').invalid" [ngClass]="'help is-danger'">Username is required.</p>
+            </div>
+
+            <div class="field">
+                <label class="label">Password : </label>
+                <div class="control">
+                    <input type="password" class="input" formControlName="password">
+                </div>
+                <p *ngIf="UserForm.get('password').invalid" [ngClass]="'help is-danger'">Password is required and min
+                    lenght
+                    8</p>
+            </div>
+
+            <div class="field">
+                <label class="label">Gender : </label>
+                <div class="control">
+                    <label class="radio">
+                        <input type="radio" name="gender" formControlName="gender" value="0">
+                        Men
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="gender" formControlName="gender" value="1">
+                        Women
+                    </label>
+                </div>
+                <p *ngIf="UserForm.get('gender').invalid" [ngClass]="'help is-danger'">Gender is required.</p>
+            </div>
+
+            <div class="field">
+                <label class="label">First Name : </label>
+                <div class="control">
+                    <input type="text" class="input" formControlName="name"/>
+                </div>
+                <p *ngIf="UserForm.get('name').invalid" [ngClass]="'help is-danger'">First name is required.</p>
+            </div>
+
+            <div class="field">
+                <label class="label">Last Name : </label>
+                <div class="control">
+                    <input type="text" class="input" formControlName="surname"/>
+                </div>
+                <p *ngIf="UserForm.get('surname').invalid" [ngClass]="'help is-danger'">Last name is required.</p>
+            </div>
+
+            <div class="field">
+                <label class="label">Email : </label>
+                <div class="control">
+                    <input type="text" class="input" formControlName="email"/>
+                </div>
+                <p *ngIf="UserForm.get('email').invalid" [ngClass]="'help is-danger'">Email is required.</p>
+            </div>
+
+            <div class="field">
+                <label class="label">Birth : </label>
+                <div class="control">
+                    <my-date-picker name="birth" [options]="BirthDatePickerOptions"
+                                    formControlName="birth"></my-date-picker>
+                </div>
+                <p *ngIf="UserForm.get('birth').invalid" [ngClass]="'help is-danger'">Birth date is required.</p>
+            </div>
+
+
+            <div class="field">
+                <label class="label">Phone : </label>
+                <div class="control">
+                    <input type="text" class="input" formControlName="phone"/>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Mobile : </label>
+                <div class="control">
+                    <input type="text" class="input" formControlName="mobile"/>
+                </div>
+                <p *ngIf="UserForm.get('mobile').invalid" [ngClass]="'help is-danger'">Mobile is required.</p>
+            </div>
+
+            <div class="field">
+                <div class="file is-info has-name">
+                    <label class="file-label">
+                        <input class="file-input" type="file" id="UserPictureProfile" (change)="onFileChange($event)"
+                               formControlName="picture_path" accept=".pdf,.jpg,.jpeg,.gif,.doc,.docx"/>
+                        <span class="file-cta">
+            <span class="file-icon">
+              <i class="fa fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Choose a file...
+            </span>
+          </span>
+                        <span class="file-name">
+            <p *ngIf="!(fileName)">Profile picture....</p>
+            <p *ngIf="fileName">{{fileName}}</p>
+          </span>
+                    </label>
+                </div>
+                <p *ngIf="UserForm.get('picture_path').invalid" [ngClass]="'help is-danger'">Profile Picture is
+                    required.</p>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <button class="button is-primary" type="submit" [disabled]="UserForm.invalid">
+          <span class="icon">
+            <i class="fa fa-pencil-alt"> </i>
+          </span>
+                        <span>Enviar</span>
+                    </button>
+                    <button class="button is-light" type="button" (click)="goBack()">
+          <span class="icon">
+            <i class="fa fa-arrow-left"> </i>
+          </span>
+                        <span>Cancelar</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
